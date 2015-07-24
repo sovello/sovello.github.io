@@ -59,7 +59,7 @@ When pushing to launchpad, you may face a problem if you have more than one app 
 
 Heroku uses the ___buildpacks___ concept to solve this challenge. You will need to add all the buildpacks so that when you push your app to heroku it installs them all.
 You use the command:
-<pre>heroku config:add BUILDPACK_URL=https://github.com/APPNAME/heroku-buildpack-FRAMEWORK\_NAME</pre>
+<pre>heroku config:add BUILDPACK_URL=https://github.com/APPNAME/heroku-buildpack-FRAMEWORK_NAME</pre>
 
 *FRAMEWORK_NAME* can be either of node, python, etc.
 
@@ -82,7 +82,7 @@ To create a database for your app:
 
 6. Now that you have the DATABASE URL, it is time to migrate your __local__ database to heroku. Here is how
 7. Run
-  * `heroku pg:push *LOCAL_DB_NAME* DATABASE_URL --app APPNAME`
+  * `heroku pg:push LOCAL_DB_NAME DATABASE_URL --app APPNAME`
    
     ___Note:___ 
       - Don't try to replace DATABASE_URL with anything
