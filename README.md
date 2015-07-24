@@ -54,6 +54,16 @@ One the code has been pushed, you may need to make sure the app is up and runnin
 
 If all is OK, access your app from the browser with the address <pre>`APPNAME.heroku.com`</pre>.
 
+##### WARNINGS:
+When pushing to launchpad, you may face a problem if you have more than one app frameworks e.g. Node and Django (Python). Heroku will identify them all and will pick one randomly to install by default.
+
+Heroku uses the ___buildpacks___ concept to solve this challenge. You will need to add all the buildpacks so that when you push your app to heroku it installs them all.
+You use the command:
+<pre>heroku config:add BUILDPACK_URL=https://github.com/APPNAME/heroku-buildpack-FRAMEWORK\_NAME</pre>
+
+*FRAMEWORK_NAME* can be either of node, python, etc.
+
+
 DATABASES
 ============
 Postgresql is like the default version of RDBMS well supported by heroku. You have to subscribe for advanced use, but you get a ___free 10,000-rows limited___ database.
@@ -72,14 +82,15 @@ To create a database for your app:
 
 6. Now that you have the DATABASE URL, it is time to migrate your __local__ database to heroku. Here is how
 7. Run
-  * `heroku pg:push _LOCAL\_DB\_NAME_ DATABASE_URL --app APPNAME`
+  * `heroku pg:push *LOCAL_DB_NAME* DATABASE_URL --app APPNAME`
    
     ___Note:___ 
       - Don't try to replace DATABASE_URL with anything
       - *LOCAL_DB_NAME* is the name of database that you are hosting locally and you want to push up to launchpad
       - I faced issues pushing the database when the Postgresql user was different from the operating system user. So, it maybe better to make sure the default Postgresql user is the same as the loged in OS user.
+
       
-NOTES:
+#### NOTES:
 * Make sure to initialize the project with a virtual environment
 * Everytime you make a change in your code or whatereve
   * Run 
@@ -90,5 +101,6 @@ NOTES:
 * To run django commands: `heroku run python APPNAME/manage.py COMMAND_NAME`
   * e.g. _`heroku run python statracker/manage.py migrate`_
 * To run any other commands: `heroku run COMMAND_NAME`
+* The procedures will be the same for any app you want to deploy to Heroku. Don't use anything that is Python/Django Specific from this doc.
 
 <sup>1</sup><sub><sup>Run this so we avoid having the SECRET_KEY value in the settings file which we may commit to github which makes it public.</sup></sub>
